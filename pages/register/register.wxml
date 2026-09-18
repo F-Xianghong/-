@@ -1,0 +1,88 @@
+<view class="page">
+  <!-- 欢迎区 -->
+  <view class="hero">
+    <text class="star s1">✦</text>
+    <text class="star s2">✧</text>
+    <text class="star s3">✦</text>
+    <view class="hero-emoji">🌊</view>
+    <view class="hero-title">欢迎来到星屿海海</view>
+    <view class="hero-sub">完成以下三步，即可开始你的海岛之旅</view>
+    <view class="wave w1"></view>
+    <view class="wave w2"></view>
+  </view>
+
+  <!-- 登录模式：老账号一键登录 -->
+  <block wx:if="{{loginMode}}">
+    <view class="account card">
+      <image wx:if="{{accountAvatar}}" class="acc-avatar" src="{{accountAvatar}}" mode="aspectFill" />
+      <view wx:else class="acc-avatar ph">🌊</view>
+      <view class="acc-name">{{accountName}}</view>
+      <view class="acc-sub">这个微信已绑定以上账号</view>
+      <button class="primary-btn login-btn" bindtap="login">一键登录</button>
+      <view class="acc-tip">一个微信账号只能绑定一个账号，想换新账号请先在「我的」页注销原账号</view>
+    </view>
+  </block>
+
+  <block wx:if="{{!loginMode}}">
+  <!-- 步骤一：绑定微信 -->
+  <view class="step card">
+    <view class="step-head">
+      <text class="step-no">1</text>
+      <view class="step-info">
+        <text class="step-title">绑定个人微信</text>
+        <text class="step-desc">一个微信账号只能注册一次</text>
+      </view>
+      <view class="step-btn {{bound ? 'done' : ''}}" bindtap="bindWechat">
+        {{bound ? '✓ 已绑定' : '绑定微信'}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 步骤二：开启位置 -->
+  <view class="step card">
+    <view class="step-head">
+      <text class="step-no">2</text>
+      <view class="step-info">
+        <text class="step-title">开启位置权限</text>
+        <text class="step-desc">用于雷达推荐附近的帖子与陪伴资源</text>
+      </view>
+      <view class="step-btn {{located ? 'done' : ''}}" bindtap="openLocation">
+        {{located ? '✓ 已开启' : (locating ? '获取中…' : '开启位置')}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 步骤三：相册权限 -->
+  <view class="step card">
+    <view class="step-head">
+      <text class="step-no">3</text>
+      <view class="step-info">
+        <text class="step-title">开启相册权限</text>
+        <text class="step-desc">用于上传证书材料、保存名片图片</text>
+      </view>
+      <view class="step-btn {{album ? 'done' : ''}}" bindtap="openAlbum">
+        {{album ? '✓ 已开启' : '开启相册'}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 选择身份 -->
+  <view class="identity-card card">
+    <view class="id-title">选择你的身份</view>
+    <view class="id-row">
+      <view
+        wx:for="{{identities}}"
+        wx:key="*this"
+        class="id-chip {{identity === item ? 'active' : ''}}"
+        data-value="{{item}}"
+        bindtap="switchIdentity"
+      >{{item}}</view>
+    </view>
+    <text wx:if="{{identity === '老师'}}" class="id-tip">老师身份注册后需通过 ABA 专业考试与资质审核</text>
+  </view>
+
+  <button class="primary-btn finish-btn {{bound && located && album ? '' : 'disabled'}}" bindtap="finish">
+    完成注册，启程 🌊
+  </button>
+  </block>
+</view>

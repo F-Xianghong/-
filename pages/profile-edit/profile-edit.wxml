@@ -1,0 +1,103 @@
+<view class="page">
+  <!-- 基本资料 -->
+  <view class="card section">
+    <view class="row avatar-row">
+      <text class="label">头像</text>
+      <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+        <image wx:if="{{avatar}}" class="avatar-img" src="{{avatar}}" mode="aspectFill" />
+        <view wx:else class="avatar-ph">🌊</view>
+        <text class="avatar-tip">更换</text>
+      </button>
+    </view>
+
+    <view class="row">
+      <text class="label">昵称</text>
+      <input
+        class="input"
+        type="nickname"
+        value="{{nickname}}"
+        bindinput="onNickname"
+        placeholder="点击填写昵称"
+        placeholder-class="ph"
+        maxlength="20"
+      />
+    </view>
+
+    <view class="row column">
+      <text class="label">角色身份</text>
+      <view class="id-row">
+        <view
+          wx:for="{{identities}}"
+          wx:key="*this"
+          class="id-chip {{identity === item ? 'active' : ''}}"
+          data-value="{{item}}"
+          bindtap="pickIdentity"
+        >{{item}}</view>
+      </view>
+      <text wx:if="{{identity === '老师'}}" class="id-tip">老师身份需通过专业考试与资质审核后才会展示认证徽章</text>
+    </view>
+
+    <view class="row">
+      <text class="label">性别</text>
+      <picker class="picker" range="{{genderOptions}}" value="{{genderIndex < 0 ? 0 : genderIndex}}" bindchange="onGender">
+        <view class="picker-text {{gender ? '' : 'ph'}}">{{gender || '请选择'}}</view>
+      </picker>
+    </view>
+
+    <view class="row">
+      <text class="label">地区</text>
+      <picker class="picker" mode="region" value="{{region}}" bindchange="onRegion">
+        <view class="picker-text {{region.length ? '' : 'ph'}}">{{region.length ? region[0] + ' ' + region[1] + ' ' + region[2] : '请选择'}}</view>
+      </picker>
+    </view>
+
+    <view class="row column">
+      <text class="label">个性签名</text>
+      <textarea
+        class="textarea"
+        value="{{signature}}"
+        bindinput="onSignature"
+        placeholder="写一句话，让这片海认识你…"
+        placeholder-class="ph"
+        maxlength="60"
+        auto-height
+      />
+    </view>
+  </view>
+
+  <!-- 收货地址 -->
+  <view class="card section">
+    <view class="addr-head">
+      <text class="label">收货地址</text>
+      <text class="addr-add" bindtap="toggleAddrForm">{{showAddrForm ? '取消' : '+ 新增'}}</text>
+    </view>
+
+    <view wx:if="{{addresses.length === 0 && !showAddrForm}}" class="addr-empty">还没有收货地址</view>
+
+    <view wx:for="{{addresses}}" wx:key="index" class="addr-item">
+      <view class="addr-main">
+        <view class="addr-line1">
+          <text class="addr-name">{{item.name}}</text>
+          <text class="addr-phone">{{item.phone}}</text>
+        </view>
+        <text class="addr-line2">{{item.region[0]}}{{item.region[1]}}{{item.region[2]}} {{item.detail}}</text>
+      </view>
+      <text class="addr-del" data-index="{{index}}" bindtap="removeAddress">删除</text>
+    </view>
+
+    <!-- 新增地址表单 -->
+    <view wx:if="{{showAddrForm}}" class="addr-form">
+      <input class="form-input" placeholder="收货人姓名" placeholder-class="ph" data-field="name" bindinput="onAddrInput" value="{{addrForm.name}}" />
+      <input class="form-input" placeholder="手机号" placeholder-class="ph" type="number" maxlength="11" data-field="phone" bindinput="onAddrInput" value="{{addrForm.phone}}" />
+      <picker mode="region" value="{{addrForm.region}}" bindchange="onAddrRegion">
+        <view class="form-input picker-text {{addrForm.region.length ? '' : 'ph'}}">
+          {{addrForm.region.length ? addrForm.region[0] + ' ' + addrForm.region[1] + ' ' + addrForm.region[2] : '省 / 市 / 区'}}
+        </view>
+      </picker>
+      <input class="form-input" placeholder="详细地址（街道、门牌号）" placeholder-class="ph" data-field="detail" bindinput="onAddrInput" value="{{addrForm.detail}}" />
+      <button class="primary-btn addr-save" bindtap="addAddress">保存地址</button>
+    </view>
+  </view>
+
+  <button class="primary-btn save-btn" bindtap="save">保存资料</button>
+</view>

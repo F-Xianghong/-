@@ -1,0 +1,158 @@
+.page {
+  min-height: 100vh;
+  padding: 24rpx 24rpx 60rpx;
+}
+
+/* 余额栏 */
+.balance {
+  display: flex;
+  align-items: center;
+  padding: 28rpx 32rpx;
+  margin-bottom: 8rpx;
+  background: linear-gradient(135deg, #1b7d9e, #166b8c);
+}
+
+.bal-info {
+  flex: 1;
+}
+
+.bal-num {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #ffe9a8;
+}
+
+.bal-label {
+  display: block;
+  margin-top: 6rpx;
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bal-btn {
+  padding: 12rpx 32rpx;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+  color: #166b8c;
+  background: #ffffff;
+  font-weight: 600;
+}
+
+.section-title {
+  margin: 28rpx 8rpx 20rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #23414d;
+}
+
+/* 商品网格 */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.good {
+  width: calc((100% - 20rpx) / 2);
+  box-sizing: border-box;
+  padding: 24rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.good-emoji {
+  font-size: 64rpx;
+  text-align: center;
+  padding: 16rpx 0;
+}
+
+.good-name-row {
+  display: flex;
+  align-items: center;
+}
+
+.good-name {
+  flex: 1;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #23414d;
+}
+
+.good-tag {
+  padding: 2rpx 12rpx;
+  border-radius: 8rpx;
+  background: #e8f4f7;
+  color: #166b8c;
+  font-size: 18rpx;
+  flex-shrink: 0;
+}
+
+.good-desc {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: #8aa5ad;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.good-foot {
+  display: flex;
+  align-items: center;
+  margin-top: 16rpx;
+}
+
+.good-price {
+  flex: 1;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #e8862e;
+}
+
+.buy-btn {
+  padding: 8rpx 28rpx;
+  border-radius: 999rpx;
+  font-size: 24rpx;
+  color: #ffffff;
+  background: linear-gradient(135deg, #1b7d9e, #166b8c);
+}
+
+.buy-btn.poor {
+  background: #b8cdd4;
+}
+
+/* 兑换记录 */
+.order {
+  display: flex;
+  align-items: center;
+  padding: 22rpx 28rpx;
+  margin-bottom: 16rpx;
+}
+
+.order-emoji {
+  font-size: 44rpx;
+}
+
+.order-info {
+  flex: 1;
+  margin-left: 20rpx;
+  min-width: 0;
+}
+
+.order-name {
+  font-size: 28rpx;
+  color: #23414d;
+  font-weight: 500;
+}
+
+.order-time {
+  display: block;
+  margin-top: 4rpx;
+  font-size: 20rpx;
+  color: #a8c0c8;
+}
+
+.order-price {
+  font-size: 26rpx;
+  color: #e8862e;
+  font-weight: 600;
+}

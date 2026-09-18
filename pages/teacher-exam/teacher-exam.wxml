@@ -1,0 +1,140 @@
+<view class="page">
+  <!-- 考试说明 -->
+  <view class="exam-head card">
+    <view class="exam-title-row">
+      <text class="exam-title">🎓 ABA 专业理论考试</text>
+      <view class="timer {{remainText <= '01:00' ? 'urgent' : ''}}">⏱ {{remainText}}</view>
+    </view>
+    <text class="exam-sub">满分 100 分，90 分及以上通过；限时 8 分钟，到时自动交卷</text>
+    <view class="exam-meta">
+      <text class="meta-chip">单选 6 × 5 分</text>
+      <text class="meta-chip">多选 5 × 6 分</text>
+      <text class="meta-chip">名词解释 5 × 8 分</text>
+    </view>
+  </view>
+
+  <!-- 单选题 -->
+  <view class="section-title">一、单项选择题</view>
+  <view wx:for="{{singles}}" wx:key="q" wx:for-item="q" class="q-card card">
+    <view class="q-title">{{index + 1}}. {{q.q}}<text class="q-score">（5 分）</text></view>
+    <view
+      wx:for="{{q.options}}"
+      wx:for-item="opt"
+      wx:for-index="oi"
+      wx:key="*this"
+      class="option {{singleAns[index] === oi ? 'selected' : ''}}"
+      data-qi="{{index}}"
+      data-oi="{{oi}}"
+      bindtap="pickSingle"
+    >
+      <text class="opt-letter">{{letters[oi]}}</text>
+      <text class="opt-text">{{opt}}</text>
+    </view>
+  </view>
+
+  <!-- 多选题 -->
+  <view class="section-title">二、多项选择题<text class="section-tip">少选得半分，错选不得分</text></view>
+  <view wx:for="{{multis}}" wx:key="q" wx:for-item="q" class="q-card card">
+    <view class="q-title">{{index + 1}}. {{q.q}}<text class="q-score">（6 分）</text></view>
+    <view
+      wx:for="{{q.options}}"
+      wx:for-item="opt"
+      wx:for-index="oi"
+      wx:key="text"
+      class="option multi {{opt.sel ? 'selected' : ''}}"
+      data-qi="{{index}}"
+      data-oi="{{oi}}"
+      bindtap="pickMulti"
+    >
+      <text class="opt-letter">{{letters[oi]}}</text>
+      <text class="opt-text">{{opt.text}}</text>
+    </view>
+  </view>
+
+  <!-- 名词解释 -->
+  <view class="section-title">三、专业名词解释</view>
+  <view wx:for="{{terms}}" wx:key="term" wx:for-item="t" class="q-card card">
+    <view class="q-title">{{index + 1}}. 请解释：{{t.term}}<text class="q-score">（8 分）</text></view>
+    <text class="q-hint">{{t.hint}}</text>
+    <textarea
+      class="term-input"
+      placeholder="输入你对这个名词的解释…"
+      placeholder-class="ph"
+      value="{{termAns[index]}}"
+      data-qi="{{index}}"
+      bindinput="onTermInput"
+      auto-height
+    />
+  </view>
+
+  <button class="primary-btn submit-btn" bindtap="submit">交卷并自动评分</button>
+
+  <!-- 成绩弹窗 -->
+  <view wx:if="{{result}}" class="mask" bindtap="closeResult">
+    <view class="sheet" catchtap="noop">
+      <view class="score-circle {{result.passed ? 'pass' : 'fail'}}">
+        <text class="score-num">{{result.total}}</text>
+        <text class="score-label">分</text>
+      </view>
+      <view wx:if="{{timeUp}}" class="timeup-tip">⏱ 考试时间到，已自动交卷</view>
+      <view class="score-verdict {{result.passed ? 'pass' : 'fail'}}">
+        {{result.passed ? '🎉 恭喜通过！可提交资质材料' : '未达到 90 分，请复习后重考'}}
+      </view>
+      <view class="score-rows">
+        <view class="score-row"><text>单选题</text><text>{{result.singleScore}} / 30</text></view>
+        <view class="score-row"><text>多选题</text><text>{{result.multiScore}} / 30</text></view>
+        <view class="score-row"><text>名词解释</text><text>{{result.termScore}} / 40</text></view>
+      </view>
+
+      <!-- 错题分析 -->
+      <view class="analysis">
+        <view class="ana-title">📝 错题分析</view>
+        <view wx:if="{{result.wrongCount === 0}}" class="ana-perfect">全部答对，太优秀了！🎉</view>
+
+        <!-- 答错的单选 -->
+        <view wx:for="{{result.wrongSingles}}" wx:key="no" class="ana-item">
+          <view class="ana-head">
+            <text class="ana-type single">单选</text>
+            <text class="ana-q">{{item.no}}. {{item.q}}</text>
+          </view>
+          <view class="ana-row">
+            <text class="ana-your">你的答案：{{item.your}}</text>
+            <text class="ana-correct">正确答案：{{item.correct}}</text>
+          </view>
+          <text class="ana-text">✔ {{item.correctText}}</text>
+        </view>
+
+        <!-- 答错/漏选的多选 -->
+        <view wx:for="{{result.wrongMultis}}" wx:key="no" class="ana-item">
+          <view class="ana-head">
+            <text class="ana-type multi">多选</text>
+            <text class="ana-q">{{item.no}}. {{item.q}}</text>
+          </view>
+          <view class="ana-row">
+            <text class="ana-your">你的答案：{{item.your}}</text>
+            <text class="ana-correct">正确答案：{{item.correct}}</text>
+          </view>
+          <text class="ana-text">✔ {{item.correctText}}</text>
+          <text class="ana-tip">问题：{{item.tip}}</text>
+        </view>
+
+        <!-- 名词解释遗漏要点 -->
+        <block wx:for="{{result.termDetail}}" wx:key="term">
+          <view wx:if="{{item.miss.length > 0}}" class="ana-item">
+            <view class="ana-head">
+              <text class="ana-type term">名词</text>
+              <text class="ana-q">{{item.term}}</text>
+            </view>
+            <view class="ana-row">
+              <text class="ana-your">命中要点：{{item.hit}}/{{item.total}} · {{item.score}} 分</text>
+            </view>
+            <text class="ana-text">遗漏要点：{{item.miss}}</text>
+          </view>
+        </block>
+      </view>
+
+      <button wx:if="{{result.passed}}" class="primary-btn sheet-btn" bindtap="goCert">去提交资质材料</button>
+      <button wx:else class="primary-btn sheet-btn" bindtap="retry">再考一次</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,146 @@
+page {
+  background: #f2f7f9;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 24rpx;
+}
+
+/* 页签 */
+.tabs {
+  display: flex;
+  padding: 8rpx;
+  margin-bottom: 24rpx;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 18rpx 0;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  color: #8aa5ad;
+}
+
+.tab.active {
+  background: linear-gradient(135deg, #1b7d9e, #166b8c);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* 岛主置顶 */
+.conv.island {
+  border: 2rpx solid #7fc8d6;
+  background: linear-gradient(135deg, #f2fafc, #e8f4f7);
+}
+
+.conv.island.sleep {
+  border-color: #dfe9ec;
+  background: #f2f7f9;
+}
+
+.ai-tag {
+  margin-left: 8rpx;
+  padding: 2rpx 12rpx;
+  border-radius: 999rpx;
+  background: #166b8c;
+  color: #ffffff;
+  font-size: 18rpx;
+  font-weight: 400;
+}
+
+/* 会话 */
+.conv {
+  display: flex;
+  align-items: center;
+  padding: 28rpx;
+  margin-bottom: 16rpx;
+}
+
+.avatar {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  background: linear-gradient(160deg, #d8f0f4, #b3dde6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48rpx;
+  flex-shrink: 0;
+}
+
+.body {
+  flex: 1;
+  margin-left: 24rpx;
+  min-width: 0;
+}
+
+.line1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #23414d;
+}
+
+.action {
+  font-size: 24rpx;
+  font-weight: 400;
+  color: #8aa5ad;
+}
+
+.time {
+  font-size: 22rpx;
+  color: #a8c0c8;
+  flex-shrink: 0;
+  margin-left: 16rpx;
+}
+
+.line2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10rpx;
+}
+
+.last {
+  flex: 1;
+  min-width: 0;
+  font-size: 26rpx;
+  color: #8aa5ad;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.badge {
+  margin-left: 16rpx;
+  min-width: 36rpx;
+  height: 36rpx;
+  padding: 0 10rpx;
+  border-radius: 999rpx;
+  background: #e86a5e;
+  color: #ffffff;
+  font-size: 22rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.post-ref {
+  margin-top: 12rpx;
+  padding: 12rpx 20rpx;
+  border-radius: 12rpx;
+  background: #f0f6f8;
+  font-size: 22rpx;
+  color: #a8c0c8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

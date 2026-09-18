@@ -1,0 +1,41 @@
+{
+  "description": "星屿海海小程序",
+  "compileType": "miniprogram",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "libVersion": "latest",
+  "appid": "wx9e4c510fb7630a51",
+  "projectname": "星屿海海",
+  "setting": {
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "urlCheck": false,
+    "compileWorklet": false,
+    "uglifyFileName": false,
+    "uploadWithSourceMap": true,
+    "enhance": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "useCompilerPlugins": false,
+    "condition": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    }
+  },
+  "simulatorPluginLibVersion": {},
+  "packOptions": {
+    "ignore": [
+      { "type": "folder", "value": "图标库" },
+      { "type": "file", "value": "ABA基础与孤独症康复知识考核试卷（康复师专用）.docx" },
+      { "type": "file", "value": "VB-MAPP学习资料.doc" }
+    ],
+    "include": []
+  },
+  "editorSetting": {}
+}

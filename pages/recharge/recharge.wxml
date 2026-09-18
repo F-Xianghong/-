@@ -1,0 +1,38 @@
+<view class="page">
+  <!-- 余额卡片 -->
+  <view class="balance card">
+    <text class="balance-label">当前余额</text>
+    <view class="balance-row">
+      <text class="balance-emoji">🐚</text>
+      <text class="balance-num">{{balance}}</text>
+    </view>
+  </view>
+
+  <!-- 充值套餐 -->
+  <view class="pkg-title">选择充值套餐</view>
+  <view class="pkg-grid">
+    <view
+      wx:for="{{packages}}"
+      wx:key="shells"
+      class="pkg card {{selected === index ? 'active' : ''}}"
+      data-index="{{index}}"
+      bindtap="select"
+    >
+      <text wx:if="{{item.tag}}" class="pkg-tag">{{item.tag}}</text>
+      <view class="pkg-shells">
+        <text class="pkg-emoji">🐚</text>
+        <text class="pkg-num">{{item.shells}}</text>
+      </view>
+      <text class="pkg-price">¥{{item.price}}</text>
+    </view>
+  </view>
+
+  <button class="primary-btn pay-btn" bindtap="pay" disabled="{{paying}}">
+    微信支付 ¥{{packages[selected].price}}
+  </button>
+
+  <view class="note">
+    <text>· 贝壳为平台虚拟代币，仅可用于平台内消费，不可提现</text>
+    <text>· 充值后贝壳即时到账，可在「我的」页查看余额</text>
+  </view>
+</view>

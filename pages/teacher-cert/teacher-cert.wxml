@@ -1,0 +1,106 @@
+<view class="page">
+  <!-- 认证状态 -->
+  <view class="status-card card {{cert.status || 'none'}}">
+    <block wx:if="{{cert.status === 'approved'}}">
+      <text class="status-emoji">🎓</text>
+      <view class="status-info">
+        <text class="status-title">已认证专业老师</text>
+        <text class="status-sub">资质信息已展示在「我的」页面</text>
+      </view>
+    </block>
+    <block wx:elif="{{cert.status === 'pending'}}">
+      <text class="status-emoji">⏳</text>
+      <view class="status-info">
+        <text class="status-title">材料审核中</text>
+        <text class="status-sub">预计 1-3 个工作日完成后台审核</text>
+      </view>
+    </block>
+    <block wx:elif="{{cert.status === 'rejected'}}">
+      <text class="status-emoji">❌</text>
+      <view class="status-info">
+        <text class="status-title">审核未通过</text>
+        <text class="status-sub">请补充材料后重新提交</text>
+      </view>
+    </block>
+    <block wx:else>
+      <text class="status-emoji">📋</text>
+      <view class="status-info">
+        <text class="status-title">专业老师认证</text>
+        <text class="status-sub">通过 ABA 理论考试（≥90 分）并提交资质材料</text>
+      </view>
+    </block>
+  </view>
+
+  <!-- 第一步：专业考试 -->
+  <view class="step-card card">
+    <view class="step-head">
+      <text class="step-no">1</text>
+      <text class="step-title">ABA 专业理论考试</text>
+      <text wx:if="{{cert.examPassed}}" class="step-done">✓ {{cert.examScore}} 分</text>
+    </view>
+    <text class="step-desc">随机出题：单选 / 多选 / 名词解释，满分 100，90 分通过</text>
+    <button class="outline-btn" bindtap="goExam">{{cert.examPassed ? '重新考试' : '开始考试'}}</button>
+  </view>
+
+  <!-- 第二步：资质材料 -->
+  <view class="step-card card {{cert.examPassed ? '' : 'locked'}}">
+    <view class="step-head">
+      <text class="step-no">2</text>
+      <text class="step-title">提交资质材料</text>
+      <text wx:if="{{cert.status === 'pending' || cert.status === 'approved'}}" class="step-done">✓ 已提交</text>
+    </view>
+    <text wx:if="{{!cert.examPassed}}" class="step-desc">通过考试后解锁</text>
+
+    <block wx:if="{{cert.examPassed}}">
+      <view class="form-row">
+        <text class="form-label">真实姓名</text>
+        <input class="form-input" placeholder="用于资质核验" placeholder-class="ph" data-field="name" value="{{form.name}}" bindinput="onInput" />
+      </view>
+      <view class="form-row">
+        <text class="form-label">专业方向</text>
+        <input class="form-input" placeholder="如：应用心理学 / 特殊教育" placeholder-class="ph" data-field="major" value="{{form.major}}" bindinput="onInput" />
+      </view>
+      <view class="form-row">
+        <text class="form-label">最高学历</text>
+        <picker range="{{eduOptions}}" value="{{form.eduIndex < 0 ? 0 : form.eduIndex}}" bindchange="onEdu">
+          <view class="form-picker {{form.eduIndex < 0 ? 'ph' : ''}}">{{form.eduIndex < 0 ? '请选择' : eduOptions[form.eduIndex]}} ›</view>
+        </picker>
+      </view>
+      <view class="form-row">
+        <text class="form-label">从业年限</text>
+        <picker range="{{yearOptions}}" value="{{form.yearIndex < 0 ? 0 : form.yearIndex}}" bindchange="onYear">
+          <view class="form-picker {{form.yearIndex < 0 ? 'ph' : ''}}">{{form.yearIndex < 0 ? '请选择' : yearOptions[form.yearIndex]}} ›</view>
+        </picker>
+      </view>
+
+      <!-- 证书材料 -->
+      <view class="cert-area">
+        <text class="form-label">证书 / 资质照片</text>
+        <view class="cert-grid">
+          <view wx:for="{{form.certs}}" wx:key="*this" class="cert-item">
+            <image class="cert-img" src="{{item}}" mode="aspectFill" data-index="{{index}}" bindtap="previewCert" />
+            <view class="cert-del" catchtap="removeCert" data-index="{{index}}">×</view>
+          </view>
+          <view wx:if="{{form.certs.length < 9}}" class="cert-add" bindtap="chooseCert">
+            <text class="cert-add-icon">＋</text>
+            <text class="cert-add-text">上传证书</text>
+          </view>
+        </view>
+        <text class="cert-tip">教师资格证 / BCBA·BCaBA 证书 / 学历证明等，将提交后台审核</text>
+      </view>
+
+      <view class="form-row column">
+        <text class="form-label">补充说明</text>
+        <textarea class="form-textarea" placeholder="其他需要说明的资质情况（选填）" placeholder-class="ph" data-field="note" value="{{form.note}}" bindinput="onInput" auto-height />
+      </view>
+
+      <button wx:if="{{cert.status !== 'pending' && cert.status !== 'approved'}}" class="primary-btn submit-btn" bindtap="submit">提交后台审核</button>
+    </block>
+  </view>
+
+  <!-- 演示操作 -->
+  <view wx:if="{{cert.status === 'pending'}}" class="demo-row">
+    <text class="demo-btn" bindtap="mockApprove">（演示）模拟审核通过</text>
+    <text class="demo-btn" bindtap="mockReject">（演示）模拟审核驳回</text>
+  </view>
+</view>

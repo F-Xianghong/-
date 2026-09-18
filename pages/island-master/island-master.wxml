@@ -1,0 +1,53 @@
+<view class="page">
+  <!-- 岛主状态栏 -->
+  <view class="master-bar {{sleeping ? 'sleep' : ''}}">
+    <view class="m-avatar">{{sleeping ? '😴' : '🐬'}}</view>
+    <view class="m-info">
+      <view class="m-name-row">
+        <text class="m-name">岛主</text>
+        <text class="m-tag">AI 助手</text>
+      </view>
+      <text class="m-status">{{sleeping ? '睡觉中…zzZ 明天再来吧' : '在线 · 今日还可提问 ' + left + ' 次'}}</text>
+    </view>
+  </view>
+
+  <!-- 消息列表 -->
+  <scroll-view scroll-y class="chat" scroll-into-view="{{scrollTo}}" scroll-with-animation>
+    <view
+      wx:for="{{messages}}"
+      wx:key="id"
+      id="msg-{{index}}"
+      class="msg-row {{item.role}}"
+    >
+      <view wx:if="{{item.role === 'ai'}}" class="m-mini">{{sleeping ? '😴' : '🐬'}}</view>
+      <view class="bubble {{item.role}}">
+        <view wx:if="{{item.typing}}" class="typing">
+          <text class="dot"></text>
+          <text class="dot"></text>
+          <text class="dot"></text>
+        </view>
+        <block wx:else>{{item.text}}</block>
+      </view>
+    </view>
+    <view class="chat-pad"></view>
+  </scroll-view>
+
+  <!-- 输入栏 -->
+  <view class="input-bar">
+    <block wx:if="{{!sleeping}}">
+      <input
+        class="chat-input"
+        value="{{input}}"
+        bindinput="onInput"
+        placeholder="向岛主提问…"
+        placeholder-class="ph"
+        confirm-type="send"
+        bindconfirm="send"
+      />
+      <view class="send-btn {{input.trim() && !sending ? '' : 'off'}}" bindtap="send">
+        {{sending ? '…' : '发送'}}
+      </view>
+    </block>
+    <view wx:else class="sleep-bar">😴 岛主睡着了，明天早上再来提问吧</view>
+  </view>
+</view>

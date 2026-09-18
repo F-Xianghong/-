@@ -1,0 +1,38 @@
+<view class="page">
+  <!-- 余额栏 -->
+  <view class="balance card">
+    <view class="bal-info">
+      <text class="bal-num">🐚 {{shells}}</text>
+      <text class="bal-label">我的贝壳</text>
+    </view>
+    <view class="bal-btn" bindtap="goRecharge">去充值</view>
+  </view>
+
+  <!-- 商品 -->
+  <view class="section-title">🛍️ 教具与服务</view>
+  <view class="grid">
+    <view wx:for="{{goods}}" wx:key="id" class="good card">
+      <view class="good-emoji">{{item.emoji}}</view>
+      <view class="good-name-row">
+        <text class="good-name">{{item.name}}</text>
+        <text class="good-tag">{{item.tag}}</text>
+      </view>
+      <text class="good-desc">{{item.desc}}</text>
+      <view class="good-foot">
+        <text class="good-price">🐚 {{item.price}}</text>
+        <view class="buy-btn {{shells < item.price ? 'poor' : ''}}" data-id="{{item.id}}" bindtap="buy">兑换</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 兑换记录 -->
+  <view wx:if="{{orders.length > 0}}" class="section-title">📦 兑换记录</view>
+  <view wx:for="{{orders}}" wx:key="id" class="order card">
+    <text class="order-emoji">{{item.emoji}}</text>
+    <view class="order-info">
+      <text class="order-name">{{item.name}}</text>
+      <text class="order-time">{{item.time}}</text>
+    </view>
+    <text class="order-price">-{{item.price}} 🐚</text>
+  </view>
+</view>

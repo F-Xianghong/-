@@ -1,0 +1,96 @@
+.page {
+  min-height: 100vh;
+  padding: 24rpx;
+}
+
+.provider {
+  display: flex;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+}
+
+.avatar {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  background: linear-gradient(160deg, #d8f0f4, #b3dde6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48rpx;
+  flex-shrink: 0;
+}
+
+.info {
+  flex: 1;
+  margin-left: 24rpx;
+  min-width: 0;
+}
+
+.name-row {
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #23414d;
+}
+
+.identity-tag {
+  margin-left: 12rpx;
+  padding: 2rpx 16rpx;
+  border-radius: 999rpx;
+  background: #fff3e0;
+  color: #e8862e;
+  font-size: 20rpx;
+}
+
+.service-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin-top: 12rpx;
+}
+
+.svc-chip {
+  padding: 4rpx 18rpx;
+  border-radius: 8rpx;
+  background: #e8f4f7;
+  color: #166b8c;
+  font-size: 22rpx;
+}
+
+.region {
+  display: block;
+  margin-top: 10rpx;
+  font-size: 22rpx;
+  color: #8aa5ad;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-left: 16rpx;
+}
+
+.price {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #e8862e;
+}
+
+.unfav {
+  font-size: 24rpx;
+  color: #8aa5ad;
+  padding: 8rpx;
+}
+
+.go-btn {
+  margin-top: 40rpx;
+  padding: 16rpx 60rpx;
+  font-size: 28rpx;
+}

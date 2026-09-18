@@ -1,0 +1,172 @@
+<view class="page">
+  <!-- 海洋头部 -->
+  <view class="header">
+    <text class="star s1">✦</text>
+    <text class="star s2">✧</text>
+    <text class="star s3">✦</text>
+    <text class="star s4">✧</text>
+
+    <view class="user-row">
+      <view class="avatar-btn" bindtap="goCard">
+        <image wx:if="{{avatar}}" class="avatar-img" src="{{avatar}}" mode="aspectFill" />
+        <view wx:else class="avatar-ph">🌊</view>
+      </view>
+      <view class="user-info" bindtap="goEdit">
+        <view class="name-row">
+          <text class="name">{{nickname}}</text>
+          <text class="go">›</text>
+        </view>
+        <text wx:if="{{signature}}" class="sig">{{signature}}</text>
+        <text wx:else class="sig dim">这片海还没有留下签名</text>
+      </view>
+      <!-- 贝壳 -->
+      <view class="shell-pill" bindtap="goRecharge">
+        <text class="shell-emoji">🐚</text>
+        <text class="shell-num">{{shells}}</text>
+      </view>
+    </view>
+
+    <!-- 当前身份（在个人资料设置中修改） -->
+    <view class="identity-row">
+      <view class="id-chip active">{{identity}}</view>
+    </view>
+
+    <view class="wave w1"></view>
+    <view class="wave w2"></view>
+  </view>
+
+  <!-- 我的数据 -->
+  <view class="stats card">
+    <view class="stats-title">我的数据</view>
+    <view class="stats-row">
+      <view wx:for="{{stats}}" wx:key="label" class="stat">
+        <text class="stat-value">{{item.value}}</text>
+        <text class="stat-label">{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 专业老师资质（认证通过的老师可见） -->
+  <view wx:if="{{isProTeacher}}" class="teacher card">
+    <view class="teacher-title">🎓 专业老师资质</view>
+    <view class="teacher-row">
+      <text class="t-label">专业方向</text>
+      <text class="t-value">{{teacherCert.major}}</text>
+    </view>
+    <view class="teacher-row">
+      <text class="t-label">最高学历</text>
+      <text class="t-value">{{teacherCert.education}}</text>
+    </view>
+    <view class="teacher-row">
+      <text class="t-label">从业年限</text>
+      <text class="t-value">{{teacherCert.years}}</text>
+    </view>
+    <view class="teacher-row">
+      <text class="t-label">考试成绩</text>
+      <text class="t-value">{{teacherCert.examScore}} 分</text>
+    </view>
+    <view class="t-cert-title">我的证书</view>
+    <scroll-view scroll-x class="t-cert-scroll" enhanced show-scrollbar="{{false}}">
+      <view class="t-cert-row">
+        <image
+          wx:for="{{teacherCert.certs}}"
+          wx:key="*this"
+          class="t-cert-img"
+          src="{{item}}"
+          mode="aspectFill"
+          data-index="{{index}}"
+          bindtap="previewTeacherCert"
+        />
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu card">
+    <view class="menu-item" bindtap="goMyPosts">
+      <text class="menu-icon">📝</text>
+      <text class="menu-label">我的帖子</text>
+      <text wx:if="{{postCount > 0}}" class="menu-badge">{{postCount}}</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goLibrary">
+      <text class="menu-icon">🗂️</text>
+      <view class="menu-label-wrap">
+        <text class="menu-label">我的资料库</text>
+        <text class="menu-sub">学生评估结果 / 评估报告，可分享给平台用户或老师</text>
+      </view>
+      <text wx:if="{{libCount > 0}}" class="menu-badge">{{libCount}}</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goFavorites">
+      <text class="menu-icon">⭐</text>
+      <text class="menu-label">我的收藏</text>
+      <text wx:if="{{favCount > 0}}" class="menu-badge">{{favCount}}</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goTeacherCert">
+      <text class="menu-icon">🎓</text>
+      <view class="menu-label-wrap">
+        <text class="menu-label">专业老师认证</text>
+        <text class="menu-sub">ABA 理论考试 + 资质材料审核 · {{certStatusText}}</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goStudy">
+      <text class="menu-icon">📚</text>
+      <view class="menu-label-wrap">
+        <text class="menu-label">公益学习资料</text>
+        <text class="menu-sub">感统 / 言语 / 社交 / 行为干预，爱心机构免费提供</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goEdit">
+      <text class="menu-icon">⚙️</text>
+      <view class="menu-label-wrap">
+        <text class="menu-label">个人资料设置</text>
+        <text class="menu-sub">昵称 / 头像 / 性别 / 地区 / 个性签名 / 收货地址</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goMall">
+      <text class="menu-icon">🛍️</text>
+      <view class="menu-label-wrap">
+        <text class="menu-label">贝壳商城</text>
+        <text class="menu-sub">教具 / 课程券，用贝壳兑换</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goRecharge">
+      <text class="menu-icon">🐚</text>
+      <view class="menu-label-wrap">
+        <text class="menu-label">贝壳充值</text>
+        <text class="menu-sub">当前余额 {{shells}} 贝壳</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goPrivacy">
+      <text class="menu-icon">🔒</text>
+      <view class="menu-label-wrap">
+        <text class="menu-label">隐私设置</text>
+        <text class="menu-sub">附近可见 / 私信权限 / 回复权限</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="logout">
+      <text class="menu-icon">🚪</text>
+      <view class="menu-label-wrap">
+        <text class="menu-label">退出登录</text>
+        <text class="menu-sub">退出后需重新验证微信登录</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="deleteAccount">
+      <text class="menu-icon">⚠️</text>
+      <view class="menu-label-wrap">
+        <text class="menu-label danger">注销账号</text>
+        <text class="menu-sub">删除全部数据，不可恢复</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+</view>

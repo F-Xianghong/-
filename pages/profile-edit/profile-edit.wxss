@@ -1,0 +1,225 @@
+.page {
+  min-height: 100vh;
+  padding: 24rpx 24rpx 60rpx;
+}
+
+.section {
+  padding: 8rpx 32rpx;
+  margin-bottom: 24rpx;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  padding: 28rpx 0;
+  border-bottom: 1rpx solid #eef4f6;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.row.column {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.label {
+  width: 160rpx;
+  flex-shrink: 0;
+  font-size: 28rpx;
+  color: #23414d;
+  font-weight: 500;
+}
+
+.input {
+  flex: 1;
+  font-size: 28rpx;
+  text-align: right;
+}
+
+.picker {
+  flex: 1;
+}
+
+.picker-text {
+  font-size: 28rpx;
+  text-align: right;
+  color: #23414d;
+}
+
+.ph {
+  color: #b8cdd4;
+}
+
+/* 角色身份 */
+.id-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 20rpx;
+}
+
+.id-chip {
+  padding: 10rpx 30rpx;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+  color: #5d7d88;
+  background: #f0f6f8;
+  border: 1rpx solid #e0ecf0;
+}
+
+.id-chip.active {
+  background: linear-gradient(135deg, #1b7d9e, #166b8c);
+  color: #ffffff;
+  font-weight: 600;
+  border-color: #166b8c;
+}
+
+.id-tip {
+  display: block;
+  margin-top: 14rpx;
+  font-size: 22rpx;
+  color: #e8862e;
+}
+
+.textarea {
+  width: 100%;
+  margin-top: 16rpx;
+  padding: 20rpx;
+  background: #f5fafb;
+  border-radius: 16rpx;
+  font-size: 26rpx;
+  min-height: 120rpx;
+  box-sizing: border-box;
+}
+
+/* 头像 */
+.avatar-row {
+  justify-content: space-between;
+}
+
+.avatar-btn {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  line-height: 1;
+}
+
+.avatar-btn::after {
+  border: none;
+}
+
+.avatar-img,
+.avatar-ph {
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 50%;
+}
+
+.avatar-ph {
+  background: linear-gradient(160deg, #d8f0f4, #9fd4e0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48rpx;
+}
+
+.avatar-tip {
+  margin-left: 16rpx;
+  font-size: 24rpx;
+  color: #8aa5ad;
+}
+
+/* 地址 */
+.addr-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28rpx 0 8rpx;
+}
+
+.addr-add {
+  font-size: 26rpx;
+  color: #166b8c;
+}
+
+.addr-empty {
+  padding: 30rpx 0;
+  text-align: center;
+  color: #b8cdd4;
+  font-size: 26rpx;
+}
+
+.addr-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 0;
+  border-top: 1rpx solid #eef4f6;
+}
+
+.addr-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.addr-line1 {
+  display: flex;
+  align-items: center;
+}
+
+.addr-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #23414d;
+}
+
+.addr-phone {
+  margin-left: 20rpx;
+  font-size: 26rpx;
+  color: #6d8b95;
+}
+
+.addr-line2 {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #8aa5ad;
+}
+
+.addr-del {
+  margin-left: 20rpx;
+  font-size: 24rpx;
+  color: #e8862e;
+  padding: 8rpx;
+}
+
+.addr-form {
+  padding: 16rpx 0 28rpx;
+  border-top: 1rpx solid #eef4f6;
+}
+
+.form-input {
+  margin-top: 20rpx;
+  padding: 22rpx 24rpx;
+  background: #f5fafb;
+  border-radius: 16rpx;
+  font-size: 26rpx;
+}
+
+.form-input.picker-text {
+  text-align: left;
+}
+
+.addr-save {
+  margin-top: 28rpx;
+  font-size: 28rpx;
+  padding: 16rpx 0;
+}
+
+.save-btn {
+  margin-top: 16rpx;
+  padding: 20rpx 0;
+}

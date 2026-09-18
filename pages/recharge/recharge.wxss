@@ -1,0 +1,114 @@
+page {
+  background: #f2f7f9;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 24rpx;
+}
+
+/* 余额卡片 */
+.balance {
+  padding: 40rpx 32rpx;
+  background: linear-gradient(160deg, #1b7d9e, #166b8c);
+}
+
+.balance-label {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.balance-row {
+  display: flex;
+  align-items: center;
+  margin-top: 16rpx;
+}
+
+.balance-emoji {
+  font-size: 48rpx;
+}
+
+.balance-num {
+  margin-left: 16rpx;
+  font-size: 64rpx;
+  font-weight: 700;
+  color: #ffe9a8;
+}
+
+/* 套餐 */
+.pkg-title {
+  margin: 32rpx 8rpx 20rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #23414d;
+}
+
+.pkg-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.pkg {
+  position: relative;
+  width: calc((100% - 20rpx) / 2);
+  box-sizing: border-box;
+  padding: 32rpx 0 28rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2rpx solid transparent;
+}
+
+.pkg.active {
+  border-color: #166b8c;
+  background: #f0f8fa;
+}
+
+.pkg-tag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 4rpx 16rpx;
+  border-radius: 0 24rpx 0 24rpx;
+  background: #e8862e;
+  color: #ffffff;
+  font-size: 20rpx;
+}
+
+.pkg-shells {
+  display: flex;
+  align-items: center;
+}
+
+.pkg-emoji {
+  font-size: 36rpx;
+}
+
+.pkg-num {
+  margin-left: 8rpx;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #23414d;
+}
+
+.pkg-price {
+  margin-top: 12rpx;
+  font-size: 26rpx;
+  color: #e8862e;
+}
+
+.pay-btn {
+  margin-top: 48rpx;
+  padding: 20rpx 0;
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  margin-top: 32rpx;
+  padding: 0 16rpx;
+  font-size: 22rpx;
+  color: #a8c0c8;
+}

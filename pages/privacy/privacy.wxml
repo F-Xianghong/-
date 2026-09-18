@@ -1,0 +1,42 @@
+<view class="page">
+  <view class="card group">
+    <view class="row">
+      <view class="row-info">
+        <text class="row-label">在雷达中展示我的位置</text>
+        <text class="row-sub">关闭后，你发布的帖子不再按距离推荐给附近的人</text>
+      </view>
+      <switch checked="{{settings.showNearby}}" data-key="showNearby" bindchange="onSwitch" color="#166b8c" />
+    </view>
+    <view class="row">
+      <view class="row-info">
+        <text class="row-label">允许陌生人私信我</text>
+        <text class="row-sub">关闭后，仅好友可以发起私聊</text>
+      </view>
+      <switch checked="{{settings.allowStrangerMsg}}" data-key="allowStrangerMsg" bindchange="onSwitch" color="#166b8c" />
+    </view>
+    <view class="row">
+      <view class="row-info">
+        <text class="row-label">允许他人回复我的帖子</text>
+        <text class="row-sub">关闭后，已发布的帖子将不能再收到新回复</text>
+      </view>
+      <switch checked="{{settings.allowReply}}" data-key="allowReply" bindchange="onSwitch" color="#166b8c" />
+    </view>
+    <view class="row">
+      <view class="row-info">
+        <text class="row-label">个性化内容推荐</text>
+        <text class="row-sub">根据浏览偏好为你推荐雷达中的帖子</text>
+      </view>
+      <switch checked="{{settings.recommend}}" data-key="recommend" bindchange="onSwitch" color="#166b8c" />
+    </view>
+  </view>
+
+  <view class="card group">
+    <view class="row link" bindtap="goBlacklist">
+      <view class="row-info">
+        <text class="row-label">黑名单管理</text>
+        <text class="row-sub">已屏蔽的用户无法私信或回复你</text>
+      </view>
+      <text class="arrow">›</text>
+    </view>
+  </view>
+</view>

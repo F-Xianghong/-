@@ -1,0 +1,27 @@
+<view class="page">
+  <view wx:if="{{list.length > 0}}" class="list">
+    <view wx:for="{{list}}" wx:key="id" class="provider card">
+      <view class="avatar">{{item.emoji}}</view>
+      <view class="info">
+        <view class="name-row">
+          <text class="name">{{item.name}}</text>
+          <text class="identity-tag">{{item.identity}}</text>
+        </view>
+        <view class="service-row">
+          <text wx:for="{{item.services}}" wx:for-item="svc" wx:key="*this" class="svc-chip">{{svc}}</text>
+        </view>
+        <text class="region">📍 {{item.region}}</text>
+      </view>
+      <view class="side">
+        <text class="price">{{item.priceText}}</text>
+        <text class="unfav" catchtap="removeFav" data-id="{{item.id}}">取消收藏</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else class="empty-state">
+    <text class="emoji">🐚</text>
+    <text>收藏夹还是一片平静的海</text>
+    <button class="primary-btn go-btn" bindtap="goRadar">去雷达看看</button>
+  </view>
+</view>

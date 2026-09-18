@@ -1,0 +1,97 @@
+<view class="page">
+  <!-- 名片头部 -->
+  <view class="hero {{bgType === 'beach' ? 'beach' : ''}}">
+    <image wx:if="{{bgType === 'custom' && bgImage}}" class="hero-bg" src="{{bgImage}}" mode="aspectFill" />
+    <view wx:if="{{bgType === 'custom' && bgImage}}" class="hero-mask"></view>
+    <text class="star s1">✦</text>
+    <text class="star s2">✧</text>
+    <text class="star s3">⭐</text>
+
+    <view wx:if="{{!visitor}}" class="bg-btn" bindtap="changeBg">🎨 背景</view>
+
+    <view class="hero-row" bindtap="goEdit">
+      <image wx:if="{{avatar && !visitor}}" class="avatar" src="{{avatar}}" mode="aspectFill" />
+      <view wx:else class="avatar ph">{{avatarEmoji}}</view>
+      <view class="hero-info">
+        <view class="name-row">
+          <text class="name">{{nickname}}</text>
+          <text wx:if="{{isTeacher}}" class="cert-tag {{certified ? 'on' : ''}}">{{certified ? '🎓 已认证' : '未认证'}}</text>
+          <text wx:if="{{!visitor}}" class="name-arrow">→</text>
+        </view>
+        <text class="sig">{{signature || '用陪伴，点亮每一次成长'}}</text>
+      </view>
+      <text wx:if="{{!visitor}}" class="hero-go">›</text>
+    </view>
+
+    <view class="wave w1"></view>
+    <view class="wave w2"></view>
+  </view>
+
+  <!-- 身份标签（在个人资料设置中修改） -->
+  <view class="id-row">
+    <view class="id-chip active"><text class="id-icon">💙</text>{{identity}}</view>
+  </view>
+
+  <!-- 身份数据 -->
+  <view class="stats card">
+    <view wx:for="{{stats}}" wx:key="label" class="stat">
+      <text class="stat-value">{{item.value}}</text>
+      <text class="stat-label">{{item.label}}</text>
+    </view>
+  </view>
+
+  <!-- 我的徽章 -->
+  <view class="card badge-card">
+    <view class="info-title">我的徽章<text class="badge-count">{{earnedCount}}/{{badges.length}}</text></view>
+    <view class="badge-grid">
+      <view
+        wx:for="{{badges}}"
+        wx:key="id"
+        class="badge {{item.earned ? 'earned' : ''}} {{item.monthly && item.earned ? 'monthly' : ''}}"
+      >
+        <text class="badge-emoji">{{item.emoji}}</text>
+        <text class="badge-name">{{item.name}}</text>
+        <text class="badge-desc">{{item.desc}}</text>
+        <text wx:if="{{item.monthly}}" class="badge-month">每月限定</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 个人资料 -->
+  <view class="card info-card">
+    <view class="info-title">个人资料</view>
+    <view class="info-row" bindtap="goEdit">
+      <text class="info-label">昵称</text>
+      <text class="info-value">{{nickname}}</text>
+      <text class="info-arrow">›</text>
+    </view>
+    <view class="info-row" bindtap="goEdit">
+      <text class="info-label">性别</text>
+      <text class="info-value {{gender ? '' : 'dim'}}">{{gender || '未设置'}}</text>
+      <text class="info-arrow">›</text>
+    </view>
+    <view class="info-row" bindtap="goEdit">
+      <text class="info-label">地区</text>
+      <text class="info-value {{regionText ? '' : 'dim'}}">{{regionText || '未设置'}}</text>
+      <text class="info-arrow">›</text>
+    </view>
+    <view class="info-row" bindtap="goEdit">
+      <text class="info-label">个性签名</text>
+      <text class="info-value {{signature ? '' : 'dim'}}">{{signature || '未设置'}}</text>
+      <text class="info-arrow" wx:if="{{!visitor}}">›</text>
+    </view>
+  </view>
+
+  <!-- 操作按钮（仅本人） -->
+  <view wx:if="{{!visitor}}" class="btn-row">
+    <view class="btn" bindtap="goFavorites">我的收藏</view>
+    <view class="btn" bindtap="goEdit">完善资料</view>
+  </view>
+
+  <!-- 分享与联系 -->
+  <view class="share-bar">
+    <button wx:if="{{!visitor}}" class="share-half" open-type="share">分享名片</button>
+    <view wx:if="{{!visitor}}" class="share-divider"></view>
+    <view class="share-half" bindtap="goMessage">消息联系</view>
+  </view>
+</view>

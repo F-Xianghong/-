@@ -1,0 +1,9 @@
+{
+  "name": "reviewTeacherCert",
+  "version": "1.0.0",
+  "description": "老师认证材料的后台审核（列表/通过/驳回）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

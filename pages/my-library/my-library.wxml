@@ -1,0 +1,131 @@
+<view class="page">
+  <!-- 顶部概览 -->
+  <view class="overview card">
+    <view class="ov-item">
+      <text class="ov-num">{{list.length}}</text>
+      <text class="ov-label">全部资料</text>
+    </view>
+    <view class="ov-item">
+      <text class="ov-num">{{sharedCount}}</text>
+      <text class="ov-label">已分享</text>
+    </view>
+    <view class="ov-item">
+      <text class="ov-num">{{groups.length}}</text>
+      <text class="ov-label">分组</text>
+    </view>
+    <view class="ov-tip">分享给平台内用户 / 老师，便于沟通孩子情况</view>
+  </view>
+
+  <!-- 操作栏 -->
+  <view class="toolbar">
+    <view class="tool-btn" bindtap="chooseWechatFile">📎 微信文件</view>
+    <view class="tool-btn" bindtap="showAddForm">✏️ 新建记录</view>
+    <view class="tool-btn" bindtap="openGroupMgr">📁 分组管理</view>
+  </view>
+
+  <!-- 类型筛选 -->
+  <view class="tabs">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="*this"
+      class="tab {{activeTab === item ? 'active' : ''}}"
+      data-value="{{item}}"
+      bindtap="switchTab"
+    >{{item}}</view>
+  </view>
+
+  <!-- 分组列表 -->
+  <block wx:if="{{filteredCount > 0}}">
+    <view wx:for="{{viewGroups}}" wx:key="name" wx:for-item="grp" class="group">
+      <view wx:if="{{grp.items.length > 0}}" class="group-head" data-name="{{grp.name}}" bindtap="toggleGroup">
+        <text class="group-name">📁 {{grp.name}}</text>
+        <text class="group-count">{{grp.items.length}} 份</text>
+        <text class="group-arrow {{grp.collapsed ? 'fold' : ''}}">▾</text>
+      </view>
+      <block wx:if="{{!grp.collapsed}}">
+        <view
+          wx:for="{{grp.items}}"
+          wx:for-item="item"
+          wx:key="id"
+          class="record card {{highlightId === item.id ? 'highlight' : ''}}"
+        >
+          <view class="record-head">
+            <text class="type-tag {{item.type === '评估报告' ? 'report' : (item.type === '微信文件' ? 'file' : 'result')}}">{{item.type}}</text>
+            <text class="title">{{item.title}}</text>
+            <text wx:if="{{item.shared}}" class="shared-badge">已分享</text>
+          </view>
+          <view class="meta">
+            <text wx:if="{{item.student}}" class="student">👦 {{item.student}}</text>
+            <text class="date">{{item.date}}</text>
+          </view>
+          <text wx:if="{{item.score}}" class="score">{{item.score}}</text>
+          <text wx:if="{{item.summary}}" class="summary">{{item.summary}}</text>
+          <view class="actions">
+            <button wx:if="{{item.filePath}}" class="preview-btn" data-path="{{item.filePath}}" catchtap="openFile">预览</button>
+            <button class="share-btn" open-type="share" data-id="{{item.id}}">转发给TA</button>
+            <view class="vis-toggle {{item.shared ? 'on' : ''}}" catchtap="toggleShare" data-id="{{item.id}}">
+              <text>{{item.shared ? '平台内公开' : '仅自己可见'}}</text>
+            </view>
+            <view class="more" catchtap="showActions" data-id="{{item.id}}">⋯</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </block>
+
+  <view wx:else class="empty-state">
+    <text class="emoji">🗂️</text>
+    <text>这个分类下还没有资料</text>
+  </view>
+
+  <!-- 新建 / 编辑弹窗 -->
+  <view wx:if="{{showForm}}" class="mask" bindtap="closeForm">
+    <view class="sheet" catchtap="noop">
+      <view class="sheet-title">{{editingId ? '编辑资料' : '新建评估记录'}}</view>
+      <view wx:if="{{!formIsFile}}" class="form-row">
+        <text class="form-label">类型</text>
+        <picker range="{{recordTypes}}" value="{{form.type === '评估报告' ? 1 : 0}}" bindchange="onFormType">
+          <view class="form-picker">{{form.type}} ›</view>
+        </picker>
+      </view>
+      <view wx:if="{{!formIsFile}}" class="form-row">
+        <text class="form-label">学生</text>
+        <input class="form-input" placeholder="学生姓名" placeholder-class="ph" data-field="student" value="{{form.student}}" bindinput="onFormInput" />
+      </view>
+      <view class="form-row">
+        <text class="form-label">标题</text>
+        <input class="form-input" placeholder="资料标题" placeholder-class="ph" data-field="title" value="{{form.title}}" bindinput="onFormInput" />
+      </view>
+      <view wx:if="{{!formIsFile}}" class="form-row">
+        <text class="form-label">结果</text>
+        <input class="form-input" placeholder="得分 / 结论（选填）" placeholder-class="ph" data-field="score" value="{{form.score}}" bindinput="onFormInput" />
+      </view>
+      <view class="form-row column">
+        <text class="form-label">备注</text>
+        <textarea class="form-textarea" placeholder="补充说明（选填）" placeholder-class="ph" data-field="summary" value="{{form.summary}}" bindinput="onFormInput" auto-height />
+      </view>
+      <view class="form-row">
+        <text class="form-label">分组</text>
+        <picker range="{{groups}}" value="{{0}}" bindchange="onFormGroup">
+          <view class="form-picker">{{form.group}} ›</view>
+        </picker>
+      </view>
+      <button class="primary-btn sheet-save" bindtap="saveForm">保存</button>
+    </view>
+  </view>
+
+  <!-- 分组管理弹窗 -->
+  <view wx:if="{{showGroupMgr}}" class="mask" bindtap="closeGroupMgr">
+    <view class="sheet" catchtap="noop">
+      <view class="sheet-title">分组管理</view>
+      <view wx:for="{{groups}}" wx:key="*this" class="grp-item">
+        <text class="grp-name">📁 {{item}}</text>
+        <text wx:if="{{item !== '默认分组'}}" class="grp-del" data-name="{{item}}" bindtap="deleteGroup">删除</text>
+      </view>
+      <view class="grp-add">
+        <input class="form-input grp-input" placeholder="新分组名称" placeholder-class="ph" value="{{newGroupName}}" bindinput="onNewGroupInput" />
+        <view class="grp-add-btn" bindtap="addGroup">添加</view>
+      </view>
+    </view>
+  </view>
+</view>

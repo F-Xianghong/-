@@ -1,0 +1,257 @@
+.page {
+  min-height: 100vh;
+  padding: 24rpx 24rpx 60rpx;
+}
+
+/* 状态卡 */
+.status-card {
+  display: flex;
+  align-items: center;
+  padding: 28rpx 32rpx;
+  margin-bottom: 24rpx;
+}
+
+.status-card.approved {
+  background: linear-gradient(135deg, #35b978, #2ea86b);
+}
+
+.status-card.pending {
+  background: linear-gradient(135deg, #e89a4e, #e8862e);
+}
+
+.status-card.rejected {
+  background: linear-gradient(135deg, #c96a6a, #b85555);
+}
+
+.status-emoji {
+  font-size: 56rpx;
+}
+
+.status-info {
+  flex: 1;
+  margin-left: 24rpx;
+}
+
+.status-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #23414d;
+}
+
+.status-card.approved .status-title,
+.status-card.pending .status-title,
+.status-card.rejected .status-title {
+  color: #ffffff;
+}
+
+.status-sub {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #8aa5ad;
+}
+
+.status-card.approved .status-sub,
+.status-card.pending .status-sub,
+.status-card.rejected .status-sub {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* 步骤卡 */
+.step-card {
+  padding: 28rpx 32rpx;
+  margin-bottom: 24rpx;
+}
+
+.step-card.locked {
+  opacity: 0.6;
+}
+
+.step-head {
+  display: flex;
+  align-items: center;
+}
+
+.step-no {
+  width: 44rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  text-align: center;
+  border-radius: 50%;
+  background: #166b8c;
+  color: #ffffff;
+  font-size: 26rpx;
+  flex-shrink: 0;
+}
+
+.step-title {
+  flex: 1;
+  margin-left: 16rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #23414d;
+}
+
+.step-done {
+  font-size: 24rpx;
+  color: #2ea86b;
+}
+
+.step-desc {
+  display: block;
+  margin: 14rpx 0 20rpx 60rpx;
+  font-size: 24rpx;
+  color: #8aa5ad;
+}
+
+.outline-btn {
+  margin: 0 0 0 60rpx;
+  padding: 0 36rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  display: inline-block;
+  font-size: 26rpx;
+  color: #166b8c;
+  background: #ffffff;
+  border: 1rpx solid #166b8c;
+  border-radius: 999rpx;
+}
+
+.outline-btn::after {
+  border: none;
+}
+
+/* 表单 */
+.form-row {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #eef4f6;
+}
+
+.form-row.column {
+  flex-direction: column;
+  align-items: stretch;
+  border-bottom: none;
+}
+
+.form-label {
+  width: 170rpx;
+  flex-shrink: 0;
+  font-size: 28rpx;
+  color: #23414d;
+  font-weight: 500;
+}
+
+.form-input {
+  flex: 1;
+  font-size: 28rpx;
+}
+
+.form-picker {
+  font-size: 28rpx;
+  color: #23414d;
+}
+
+.form-textarea {
+  width: 100%;
+  margin-top: 16rpx;
+  padding: 20rpx;
+  background: #f5fafb;
+  border-radius: 16rpx;
+  font-size: 26rpx;
+  min-height: 120rpx;
+  box-sizing: border-box;
+}
+
+.ph {
+  color: #b8cdd4;
+}
+
+/* 证书上传 */
+.cert-area {
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #eef4f6;
+}
+
+.cert-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 20rpx;
+}
+
+.cert-item {
+  position: relative;
+  width: 150rpx;
+  height: 150rpx;
+}
+
+.cert-img {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 16rpx;
+}
+
+.cert-del {
+  position: absolute;
+  top: -12rpx;
+  right: -12rpx;
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 36rpx;
+  text-align: center;
+  border-radius: 50%;
+  background: rgba(15, 45, 60, 0.7);
+  color: #ffffff;
+  font-size: 28rpx;
+}
+
+.cert-add {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 16rpx;
+  border: 2rpx dashed #b8cdd4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cert-add-icon {
+  font-size: 48rpx;
+  color: #8aa5ad;
+}
+
+.cert-add-text {
+  margin-top: 6rpx;
+  font-size: 20rpx;
+  color: #a8c0c8;
+}
+
+.cert-tip {
+  display: block;
+  margin-top: 16rpx;
+  font-size: 22rpx;
+  color: #a8c0c8;
+}
+
+.submit-btn {
+  margin-top: 32rpx;
+  padding: 18rpx 0;
+  font-size: 30rpx;
+}
+
+/* 演示 */
+.demo-row {
+  display: flex;
+  justify-content: center;
+  gap: 40rpx;
+  margin-top: 16rpx;
+}
+
+.demo-btn {
+  font-size: 22rpx;
+  color: #b8cdd4;
+  text-decoration: underline;
+}

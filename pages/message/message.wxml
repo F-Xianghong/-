@@ -1,0 +1,90 @@
+<view class="page">
+  <!-- 页签：私聊 / 帖子回复 -->
+  <view class="tabs card">
+    <view
+      class="tab {{tab === 'chat' ? 'active' : ''}}"
+      data-tab="chat"
+      bindtap="switchTab"
+    >私聊</view>
+    <view
+      class="tab {{tab === 'reply' ? 'active' : ''}}"
+      data-tab="reply"
+      bindtap="switchTab"
+    >帖子回复</view>
+  </view>
+
+  <!-- 私聊列表 -->
+  <block wx:if="{{tab === 'chat'}}">
+    <!-- 岛主 AI 置顶会话 -->
+    <view class="conv card island {{islandSleeping ? 'sleep' : ''}}" bindtap="goIsland">
+      <view class="avatar">{{islandSleeping ? '😴' : '🐬'}}</view>
+      <view class="body">
+        <view class="line1">
+          <text class="name">岛主 <text class="ai-tag">AI</text></text>
+          <text class="time">置顶</text>
+        </view>
+        <view class="line2">
+          <text class="last">{{islandSleeping ? '岛主睡着了，明天再来吧' : '有育儿难题？今日还可向我提问 ' + islandLeft + ' 次'}}</text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{conversations.length > 0}}" class="list">
+      <view
+        wx:for="{{conversations}}"
+        wx:key="id"
+        class="conv card"
+        data-name="{{item.name}}"
+        bindtap="openChat"
+      >
+        <view class="avatar">{{item.emoji}}</view>
+        <view class="body">
+          <view class="line1">
+            <text class="name">{{item.name}}</text>
+            <text class="time">{{item.time}}</text>
+          </view>
+          <view class="line2">
+            <text class="last">{{item.last}}</text>
+            <view wx:if="{{item.unread > 0}}" class="badge">{{item.unread}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view wx:else class="empty-state">
+      <text class="emoji">💬</text>
+      <text>还没有私聊</text>
+      <text>去雷达找一位同路人聊聊吧</text>
+    </view>
+  </block>
+
+  <!-- 帖子回复列表 -->
+  <block wx:else>
+    <view wx:if="{{replies.length > 0}}" class="list">
+      <view
+        wx:for="{{replies}}"
+        wx:key="id"
+        class="conv card"
+        bindtap="openReply"
+      >
+        <view class="avatar">{{item.emoji}}</view>
+        <view class="body">
+          <view class="line1">
+            <text class="name">{{item.name}} <text class="action">{{item.action}}</text></text>
+            <text class="time">{{item.time}}</text>
+          </view>
+          <view class="line2">
+            <text class="last">{{item.reply || '❤️ 觉得你的帖子很棒'}}</text>
+            <view wx:if="{{item.unread > 0}}" class="badge">{{item.unread}}</view>
+          </view>
+          <view class="post-ref">帖子：{{item.postSnippet}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view wx:else class="empty-state">
+      <text class="emoji">📮</text>
+      <text>还没有收到回复</text>
+      <text>发布一条帖子，和大家互动起来吧</text>
+    </view>
+  </block>
+</view>

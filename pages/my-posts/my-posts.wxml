@@ -1,0 +1,42 @@
+<view class="page">
+  <view wx:if="{{list.length > 0}}" class="list">
+    <view wx:for="{{list}}" wx:key="id" class="post card">
+      <view class="post-head">
+        <text wx:if="{{item.topic}}" class="topic-tag"># {{item.topic}}</text>
+        <text class="time">{{item.timeText}}</text>
+      </view>
+
+      <view wx:if="{{item.content}}" class="post-content">{{item.content}}</view>
+
+      <!-- 图片九宫格 -->
+      <view wx:if="{{item.imageCount > 0}}" class="img-grid">
+        <image
+          wx:for="{{item.images}}"
+          wx:for-item="img"
+          wx:key="*this"
+          class="img"
+          src="{{img}}"
+          mode="aspectFill"
+          data-urls="{{item.images}}"
+          data-current="{{img}}"
+          bindtap="previewImage"
+        />
+      </view>
+
+      <view class="post-foot">
+        <text class="foot-item">👍 {{item.likes || 0}}</text>
+        <text class="foot-item">💬 {{item.comments || 0}}</text>
+        <text class="foot-region">📍 {{item.region}}</text>
+        <text class="del" catchtap="removePost" data-id="{{item.id}}">删除</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空态 -->
+  <view wx:else class="empty-state">
+    <text class="emoji">📝</text>
+    <text>还没有发布过帖子</text>
+    <text>分享第一条动态，让附近的人看见你</text>
+    <button class="primary-btn publish-btn" bindtap="goPublish">去发布 🌊</button>
+  </view>
+</view>

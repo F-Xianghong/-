@@ -1,0 +1,127 @@
+<view class="page">
+  <!-- 顶部海区 -->
+  <view class="hero">
+    <text class="star s1">✦</text>
+    <text class="star s2">✧</text>
+    <text class="star s3">✦</text>
+    <view class="hero-title">雷达</view>
+    <view class="hero-sub">搜索附近的帖子，听见身边的声音 🌊</view>
+
+    <!-- 搜索框 -->
+    <view class="search-box">
+      <text class="search-icon">🔍</text>
+      <input
+        class="search-input"
+        value="{{keyword}}"
+        bindinput="onKeyword"
+        placeholder="搜索帖子 / 作者 / 话题"
+        placeholder-class="ph"
+        confirm-type="search"
+      />
+      <text wx:if="{{keyword}}" class="search-clear" bindtap="clearKeyword">×</text>
+    </view>
+
+    <view class="wave w1"></view>
+    <view class="wave w2"></view>
+  </view>
+
+  <!-- 筛选卡片（可展开/收起） -->
+  <view class="filter-card card">
+    <view class="filter-head" bindtap="toggleFilter">
+      <text class="filter-title">筛选</text>
+      <text wx:if="{{!filterExpanded}}" class="filter-summary">{{distanceOptions[distanceIndex]}} · {{identityOptions[identityIndex]}}{{onlyImage ? ' · 图片分享' : ''}} · {{topicOptions[topicIndex]}}</text>
+      <text class="filter-arrow {{filterExpanded ? '' : 'fold'}}">▾</text>
+    </view>
+    <block wx:if="{{filterExpanded}}">
+      <!-- 距离筛选 -->
+      <view class="chip-row first-row">
+        <view
+          wx:for="{{distanceOptions}}"
+          wx:key="*this"
+          class="chip {{distanceIndex === index ? 'active' : ''}}"
+          data-index="{{index}}"
+          bindtap="pickDistance"
+        >{{item}}</view>
+      </view>
+      <!-- 身份筛选 -->
+      <scroll-view scroll-x class="filter-scroll" enhanced show-scrollbar="{{false}}">
+        <view class="chip-row filter-row">
+          <view
+            wx:for="{{identityOptions}}"
+            wx:key="*this"
+            class="chip id-chip {{identityIndex === index ? 'active' : ''}}"
+            data-index="{{index}}"
+            bindtap="pickIdentity"
+          >{{item === '全部身份' ? item : '只看' + item}}</view>
+          <view
+            class="chip img-chip {{onlyImage ? 'active' : ''}}"
+            bindtap="toggleOnlyImage"
+          >🖼 只看图片分享</view>
+        </view>
+      </scroll-view>
+      <!-- 话题筛选 -->
+      <scroll-view scroll-x class="filter-scroll" enhanced show-scrollbar="{{false}}">
+        <view class="chip-row filter-row">
+          <view
+            wx:for="{{topicOptions}}"
+            wx:key="*this"
+            class="chip topic-chip {{topicIndex === index ? 'active' : ''}}"
+            data-index="{{index}}"
+            bindtap="pickTopic"
+          >{{item === '全部' ? item : '# ' + item}}</view>
+        </view>
+      </scroll-view>
+    </block>
+  </view>
+
+  <!-- 结果数量 -->
+  <view class="result-count">
+    <text>扫描到 {{list.length}} 条帖子</text>
+  </view>
+
+  <!-- 帖子列表 -->
+  <view wx:if="{{list.length > 0}}" class="list">
+    <view wx:for="{{list}}" wx:key="id" class="post card" data-id="{{item.id}}" bindtap="openPost">
+      <view class="post-head">
+        <view
+          class="avatar"
+          catchtap="openAuthor"
+          data-name="{{item.authorName}}"
+          data-emoji="{{item.authorEmoji}}"
+          data-identity="{{item.identity}}"
+        >{{item.authorEmoji}}</view>
+        <view class="head-info">
+          <view class="name-row">
+            <text class="name">{{item.authorName}}</text>
+            <text class="identity-tag">{{item.identity}}</text>
+            <text wx:if="{{item.mine}}" class="mine-tag">我的</text>
+          </view>
+          <text class="meta">📍 {{item.distanceText}} · {{item.timeText}}</text>
+        </view>
+        <view class="fav {{item.isFav ? 'faved' : ''}}" catchtap="toggleFav" data-id="{{item.id}}">
+          {{item.isFav ? '❤️' : '🤍'}}
+        </view>
+      </view>
+
+      <view class="post-content">{{item.content}}</view>
+
+      <view class="tag-row">
+        <text wx:if="{{item.topic}}" class="topic-tag"># {{item.topic}}</text>
+        <text wx:if="{{item.imageCount > 0}}" class="img-count">🖼 {{item.imageCount}} 张图</text>
+      </view>
+
+      <view class="post-foot">
+        <text class="foot-item">👍 {{item.likes}}</text>
+        <text class="foot-item">💬 {{item.comments}}</text>
+        <text class="region">{{item.region}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空态 -->
+  <view wx:else class="empty-state">
+    <text class="emoji">🛰️</text>
+    <text>这个频段暂时没有信号</text>
+    <text>试试放宽距离或换个关键词吧</text>
+  </view>
+</view>

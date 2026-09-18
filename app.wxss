@@ -1,0 +1,36 @@
+page {
+  background: #f2f7f9;
+  color: #23414d;
+  font-size: 28rpx;
+  font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 24rpx rgba(22, 107, 140, 0.06);
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #1b7d9e, #166b8c);
+  color: #ffffff;
+  border-radius: 999rpx;
+  font-size: 30rpx;
+}
+
+.primary-btn::after {
+  border: none;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 160rpx 0;
+  color: #9db8c0;
+}
+
+.empty-state .emoji {
+  font-size: 88rpx;
+  margin-bottom: 24rpx;
+}

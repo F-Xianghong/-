@@ -1,0 +1,317 @@
+.page {
+  min-height: 100vh;
+  padding-bottom: 40rpx;
+}
+
+/* 海洋头部 */
+.header {
+  position: relative;
+  padding: 60rpx 40rpx 150rpx;
+  background: linear-gradient(165deg, #1b7d9e 0%, #166b8c 50%, #0f5570 100%);
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  color: #ffe9a8;
+}
+
+.s1 { top: 50rpx; right: 100rpx; font-size: 36rpx; }
+.s2 { top: 140rpx; right: 260rpx; font-size: 22rpx; opacity: 0.7; }
+.s3 { top: 220rpx; right: 70rpx; font-size: 26rpx; opacity: 0.85; }
+.s4 { top: 90rpx; right: 380rpx; font-size: 18rpx; opacity: 0.5; }
+
+.user-row {
+  display: flex;
+  align-items: center;
+}
+
+.avatar-btn {
+  padding: 0;
+  margin: 0;
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 50%;
+  background: transparent;
+  line-height: 1;
+}
+
+.avatar-btn::after {
+  border: none;
+}
+
+.avatar-img,
+.avatar-ph {
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255, 255, 255, 0.7);
+}
+
+.avatar-ph {
+  background: linear-gradient(160deg, #d8f0f4, #9fd4e0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56rpx;
+}
+
+.user-info {
+  flex: 1;
+  margin-left: 28rpx;
+  min-width: 0;
+}
+
+.name-row {
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.go {
+  margin-left: 12rpx;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 36rpx;
+}
+
+.sig {
+  display: block;
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.85);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sig.dim {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* 贝壳 */
+.shell-pill {
+  display: flex;
+  align-items: center;
+  padding: 10rpx 24rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1rpx solid rgba(255, 255, 255, 0.35);
+}
+
+.shell-emoji {
+  font-size: 30rpx;
+}
+
+.shell-num {
+  margin-left: 8rpx;
+  color: #ffe9a8;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+/* 身份标签 */
+.identity-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 32rpx;
+}
+
+.id-chip {
+  padding: 10rpx 28rpx;
+  border-radius: 999rpx;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.14);
+  border: 1rpx solid rgba(255, 255, 255, 0.3);
+}
+
+.id-chip.active {
+  background: #ffffff;
+  color: #166b8c;
+  font-weight: 600;
+  border-color: #ffffff;
+}
+
+/* 海浪 */
+.wave {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  height: 120rpx;
+  border-radius: 100% 100% 0 0;
+}
+
+.w1 {
+  bottom: -55rpx;
+  background: rgba(127, 200, 214, 0.45);
+}
+
+.w2 {
+  bottom: -80rpx;
+  background: #f2f7f9;
+}
+
+/* 身份数据 */
+.stats {
+  position: relative;
+  z-index: 10;
+  margin: -60rpx 24rpx 0;
+  padding: 28rpx 32rpx;
+}
+
+.stats-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #23414d;
+  margin-bottom: 24rpx;
+}
+
+.stats-row {
+  display: flex;
+}
+
+.stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1rpx solid #eef4f6;
+}
+
+.stat:last-child {
+  border-right: none;
+}
+
+.stat-value {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #23414d;
+}
+
+.stat-label {
+  margin-top: 6rpx;
+  font-size: 24rpx;
+  color: #8aa5ad;
+}
+
+/* 专业老师资质 */
+.teacher {
+  margin: 24rpx 24rpx 0;
+  padding: 28rpx 32rpx;
+}
+
+.teacher-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #23414d;
+  margin-bottom: 16rpx;
+}
+
+.teacher-row {
+  display: flex;
+  align-items: center;
+  padding: 14rpx 0;
+}
+
+.t-label {
+  width: 160rpx;
+  flex-shrink: 0;
+  font-size: 26rpx;
+  color: #8aa5ad;
+}
+
+.t-value {
+  font-size: 26rpx;
+  color: #23414d;
+  font-weight: 500;
+}
+
+.t-cert-title {
+  margin-top: 20rpx;
+  font-size: 26rpx;
+  color: #8aa5ad;
+}
+
+.t-cert-scroll {
+  margin-top: 16rpx;
+  white-space: nowrap;
+}
+
+.t-cert-row {
+  display: inline-flex;
+  gap: 16rpx;
+}
+
+.t-cert-img {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 16rpx;
+  flex-shrink: 0;
+}
+
+/* 菜单 */
+.menu {
+  margin: 24rpx;
+  padding: 8rpx 32rpx;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #eef4f6;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-icon {
+  font-size: 36rpx;
+  margin-right: 24rpx;
+}
+
+.menu-label {
+  font-size: 30rpx;
+  color: #23414d;
+}
+
+.menu-label-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-sub {
+  margin-top: 6rpx;
+  font-size: 22rpx;
+  color: #a8c0c8;
+}
+
+.menu-item > .menu-label {
+  flex: 1;
+}
+
+.menu-badge {
+  margin-right: 12rpx;
+  padding: 2rpx 16rpx;
+  border-radius: 999rpx;
+  background: #e8f4f7;
+  color: #166b8c;
+  font-size: 22rpx;
+}
+
+.menu-arrow {
+  color: #b8cdd4;
+  font-size: 36rpx;
+}
+
+.menu-label.danger {
+  color: #c96a6a;
+}

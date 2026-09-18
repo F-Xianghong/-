@@ -1,0 +1,62 @@
+<view class="page">
+  <!-- 顶部说明 -->
+  <view class="banner card">
+    <text class="banner-title">🌱 公益学习资料</text>
+    <text class="banner-sub">由平台内爱心机构与老师免费提供，随时学、放心用</text>
+  </view>
+
+  <!-- 分类筛选 -->
+  <scroll-view scroll-x class="cat-scroll" enhanced show-scrollbar="{{false}}">
+    <view class="cat-row">
+      <view
+        wx:for="{{categories}}"
+        wx:key="*this"
+        class="cat-chip {{activeCat === item ? 'active' : ''}}"
+        data-value="{{item}}"
+        bindtap="switchCat"
+      >{{item}}</view>
+    </view>
+  </scroll-view>
+
+  <!-- 资料列表 -->
+  <view wx:if="{{list.length > 0}}" class="list">
+    <view wx:for="{{list}}" wx:key="id" class="material card" data-id="{{item.id}}" bindtap="openDetail">
+      <view class="head">
+        <text class="type-tag {{item.type === '视频' ? 'video' : (item.type === '直播回放' ? 'live' : 'article')}}">{{item.type}}</text>
+        <text class="title">{{item.title}}</text>
+        <view class="fav" catchtap="toggleFav" data-id="{{item.id}}">{{item.isFav ? '❤️' : '🤍'}}</view>
+      </view>
+      <text class="intro">{{item.intro}}</text>
+      <view class="foot">
+        <text class="org">🏫 {{item.org}}</text>
+        <text class="meta">{{item.duration}} · {{item.views}} 人学过</text>
+      </view>
+      <view class="free-row">
+        <text class="free-tag">公益免费</text>
+        <text class="cat-tag"># {{item.category}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else class="empty-state">
+    <text class="emoji">📚</text>
+    <text>这个分类暂时没有资料</text>
+  </view>
+
+  <!-- 详情弹窗 -->
+  <view wx:if="{{detail}}" class="mask" bindtap="closeDetail">
+    <view class="sheet" catchtap="noop">
+      <view class="sheet-head">
+        <text class="type-tag {{detail.type === '视频' ? 'video' : (detail.type === '直播回放' ? 'live' : 'article')}}">{{detail.type}}</text>
+        <text class="free-tag">公益免费</text>
+      </view>
+      <view class="sheet-title">{{detail.title}}</view>
+      <text class="sheet-intro">{{detail.intro}}</text>
+      <view class="sheet-meta">
+        <text>🏫 {{detail.org}}</text>
+        <text>{{detail.duration}} · {{detail.views}} 人学过</text>
+      </view>
+      <button class="primary-btn sheet-btn" bindtap="startLearn">开始学习</button>
+    </view>
+  </view>
+</view>

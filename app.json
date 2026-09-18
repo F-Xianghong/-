@@ -1,0 +1,61 @@
+{
+  "pages": [
+    "pages/radar/radar",
+    "pages/publish/publish",
+    "pages/message/message",
+    "pages/profile/profile",
+    "pages/user-card/user-card",
+    "pages/profile-edit/profile-edit",
+    "pages/favorites/favorites",
+    "pages/my-posts/my-posts",
+    "pages/recharge/recharge",
+    "pages/privacy/privacy",
+    "pages/my-library/my-library",
+    "pages/study/study",
+    "pages/teacher-exam/teacher-exam",
+    "pages/teacher-cert/teacher-cert",
+    "pages/register/register",
+    "pages/island-master/island-master",
+    "pages/mall/mall"
+  ],
+  "window": {
+    "navigationBarTitleText": "星屿海海",
+    "navigationBarBackgroundColor": "#166b8c",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f2f7f9",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#8aa5ad",
+    "selectedColor": "#166b8c",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/radar/radar",
+        "text": "雷达"
+      },
+      {
+        "pagePath": "pages/publish/publish",
+        "text": "发布"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于在雷达中推荐附近的帖子与陪伴资源"
+    }
+  },
+  "requiredPrivateInfos": ["getLocation"],
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json"
+}
